@@ -50,9 +50,9 @@ export default async function AuthButton() {
     );
   }
   return user ? (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center justify-center gap-4">
       <ThemeSwitcher />
-       <span>Hey, <a><Link href="/protected" className="cursor-pointer">{user.email}</Link></a>!</span>
+      <span>Hey, <Link href="/protected" className="cursor-pointer">{user.email}</Link>!</span>
       <form action={signOutAction}>
         <Button type="submit" variant={"outline"}>
           Sign out

@@ -2,9 +2,10 @@ import { signOutAction } from "@/app/actions";
 import { hasEnvVars } from "@/utils/supabase/check-env-vars";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import { createClient } from "@/utils/supabase/server";
 import { ThemeSwitcher } from "./theme-switcher";
+import { LogOut, User } from "lucide-react";
 
 export default async function AuthButton() {
   const supabase = await createClient();
@@ -52,10 +53,16 @@ export default async function AuthButton() {
   return user ? (
     <div className="flex items-center justify-center gap-4">
       <ThemeSwitcher />
-      <span>Hey, <Link href="/protected" className="cursor-pointer">{user.email}</Link>!</span>
+      <span className="hidden sm:block">Hey, <Link href="/protected" className="cursor-pointer">{user.email}</Link>!</span>
+      <Link className={buttonVariants({className:"block sm:hidden"})} href="/protected">
+        <User /> Profile
+      </Link>
       <form action={signOutAction}>
-        <Button type="submit" variant={"outline"}>
+        <Button className="hidden sm:block" type="submit" variant={"outline"}>
           Sign out
+        </Button>
+        <Button className="block sm:hidden" type="submit" variant={"secondary"}>
+          <LogOut />
         </Button>
       </form>
     </div>

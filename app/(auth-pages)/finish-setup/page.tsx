@@ -54,52 +54,44 @@ export default function FinishSetupPage() {
   
 
   return (
-    <div className="bg-background flex items-center justify-center px-4">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="text-lg">Finish Setting Up</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="flex flex-col items-center gap-y-6 w-full">
+      <h1 className="text-2xl md:text-3xl text-center font-bold">Complete your profile!</h1>
+      <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-md">
+        <div className="flex justify-center">
+          <div className="relative w-32 h-32 md:w-40 md:h-40">
+            <Image
+              src={avatarUrl}
+              alt="Avatar preview"
+              fill
+              className="rounded-full border object-cover"
+            />
+          </div>
+        </div>
+        
+        <div>
+          <label className="block text-sm mb-1">Name</label>
+          <Input
+            type="text"
+            placeholder="Your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
 
-          <div className="flex justify-center">
-              <Image
-                src={avatarUrl}
-                alt="Avatar preview"
-                width={64}
-                height={64}
-                className="rounded-full border"
-              />
-            </div>
+        <div>
+          <label className="block text-sm mb-1">Avatar URL</label>
+          <Input
+            type="text"
+            placeholder="https://..."
+            value={avatarUrl}
+            onChange={(e) => setAvatarUrl(e.target.value)}
+          />
+        </div>
 
-            <div>
-              <label className="block text-sm mb-1">Name</label>
-              <Input
-                type="text"
-                placeholder="Your name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm mb-1">Avatar URL</label>
-              <Input
-                type="text"
-                placeholder="https://..."
-                value={avatarUrl}
-                onChange={(e) => setAvatarUrl(e.target.value)}
-              />
-            </div>
-
-
-
-            <Button type="submit" className="w-full">
-              Save and Continue
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+        <Button type="submit" className="w-full">
+          Save and Continue
+        </Button>
+      </form>
     </div>
   );
 }

@@ -66,31 +66,32 @@ export default function UserSettings() {
   }
 
   return (
-    <div className="w-full max-w-5xl mx-auto flex flex-col space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div className="flex-1">
-          <h1 className="text-3xl font-bold">{userData.name}</h1>
+    <div className="flex flex-col align-center gap-y-6 md:w-full">
+      <div className="flex flex-row justify-between">
+        <div className="flex flex-col justify-center">
+          <h1 className="text-2xl lg:text-3xl font-bold">{userData.name}</h1>
           <p className="text-muted-foreground capitalize">{userData.role}</p>
         </div>
-        <Image
-          src={userData.avatar}
-          alt="User Avatar"
-          width={96}
-          height={96}
-          className="rounded-full border"
-        />
+        <div className="relative w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24">
+          <Image
+            src={userData.avatar}
+            alt="User Avatar"
+            fill
+            className="rounded-full border object-cover"
+          />
+        </div>
       </div>
   
       <div className="w-full flex items-center gap-4">
         <p className="text-base font-medium">Email:</p>
-        <div className="border rounded-xl p-4 bg-muted w-1/3">
+        <div className="border rounded-xl py-2 px-4 bg-muted w-full md:w-1/3">
           <p className="text-base">{userData.email}</p>
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-4">
-        <Button variant="outline">Update Profile</Button>
-        <Button onClick={handleBecomeInstructor}>{userData.role === 'instructor' ? 'Become Student' : 'Become Instructor'}</Button>
+      <div className="flex flex-wrap gap-4 justify-center">
+        <Button>Update Profile</Button>
+        <Button variant="outline" onClick={handleBecomeInstructor}>{userData.role === 'instructor' ? 'Become Student' : 'Become Instructor'}</Button>
       </div>
     </div>
   );  

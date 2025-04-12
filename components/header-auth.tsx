@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { createClient } from "@/utils/supabase/server";
+import { ThemeSwitcher } from "./theme-switcher";
 
 export default async function AuthButton() {
   const supabase = await createClient();
@@ -50,7 +51,8 @@ export default async function AuthButton() {
   }
   return user ? (
     <div className="flex items-center gap-4">
-      Hey, {user.email}!
+      <ThemeSwitcher />
+       <span>Hey, <a><Link href="/protected" className="cursor-pointer">{user.email}</Link></a>!</span>
       <form action={signOutAction}>
         <Button type="submit" variant={"outline"}>
           Sign out
@@ -59,6 +61,7 @@ export default async function AuthButton() {
     </div>
   ) : (
     <div className="flex gap-2">
+      <ThemeSwitcher />
       <Button asChild size="sm" variant={"outline"}>
         <Link href="/sign-in">Sign in</Link>
       </Button>

@@ -49,7 +49,7 @@ export default function FinishSetupPage() {
       return;
     }
   
-    router.push('/protected');
+    router.push('/profile');
   };
   
 

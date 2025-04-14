@@ -53,8 +53,8 @@ export default async function AuthButton() {
   return user ? (
     <div className="flex items-center justify-center gap-4">
       <ThemeSwitcher />
-      <span className="hidden sm:block">Hey, <Link href="/protected" className="cursor-pointer">{user.email}</Link>!</span>
-      <Link className={buttonVariants({className:"block sm:hidden"})} href="/protected">
+      <span className="hidden sm:block">Hey, <Link href="/profile" className="cursor-pointer">{user.email}</Link>!</span>
+      <Link className={buttonVariants({className:"block sm:hidden"})} href="/profile">
         <User /> Profile
       </Link>
       <form action={signOutAction}>

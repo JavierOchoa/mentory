@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import { ThemeSwitcher } from '@/components/theme-switcher';
 
 type UserData = {
   name: string;
@@ -68,8 +69,12 @@ export default function UserSettings() {
   return (
     <div className="flex flex-col align-center gap-y-6 md:w-full">
       <div className="flex flex-row justify-between">
+        <h1 className="block sm:hidden text-4xl lg:text-3xl font-bold">Profile</h1>
+        <ThemeSwitcher />
+      </div>
+      <div className="flex flex-row justify-between">
         <div className="flex flex-col justify-center">
-          <h1 className="text-2xl lg:text-3xl font-bold">{userData.name}</h1>
+          <h2 className="text-2xl lg:text-3xl font-bold">{userData.name}</h2>
           <p className="text-muted-foreground capitalize">{userData.role}</p>
         </div>
         <div className="relative w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24">
@@ -88,6 +93,7 @@ export default function UserSettings() {
           <p className="text-base">{userData.email}</p>
         </div>
       </div>
+      
 
       <div className="flex flex-wrap gap-4 justify-center">
         <Button>Update Profile</Button>

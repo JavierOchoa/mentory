@@ -7,6 +7,8 @@ import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import Link from "next/link";
 import "./globals.css";
+import BottomNav from "@/components/bottom-nav";
+
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -39,7 +41,7 @@ export default function RootLayout({
         >
           <main className="min-h-screen flex flex-col items-center">
             <div className="flex-1 w-full flex flex-col gap-10 items-center">
-              <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
+              <nav className="hidden sm:flex w-full justify-center border-b border-b-foreground/10 h-16">
                 <div className="w-full flex justify-between items-center p-3 px-5 text-sm">
                   <div className="flex gap-5 items-center font-semibold">
                     <Link href={"/"} className="text-xl font-bold tracking-wide">MENTORY</Link>
@@ -52,7 +54,7 @@ export default function RootLayout({
               <div className="flex-1 flex-col gap-20 p-5 w-full md:max-w-7xl">
                 {children}
               </div>
-
+              <BottomNav />
               <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-4">
                 <p>
                 &copy; 2025 <span className="font-bold tracking-wide">MENTORY</span>. All rights reserved.

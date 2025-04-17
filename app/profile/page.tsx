@@ -5,6 +5,7 @@ import { createClient } from "@/utils/supabase/client";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import SettingDataSection from "@/components/settings-data-section";
 
 type UserData = {
   name: string;
@@ -93,21 +94,17 @@ export default function UserSettings() {
         </div>
       </div>
 
-      <div className="w-full flex items-center gap-4">
-        <p className="text-base font-medium">Email:</p>
-        <div className="border rounded-xl py-2 px-4 bg-muted w-full md:w-1/3">
-          <p className="text-base">{userData.email}</p>
-        </div>
-      </div>
-
-      <div className="flex flex-wrap gap-4 justify-center">
-        <Button>Update Profile</Button>
+      <div className="flex flex-wrap gap-4">
         <Button variant="outline" onClick={handleBecomeInstructor}>
           {userData.role === "instructor"
             ? "Become Student"
             : "Become Instructor"}
         </Button>
       </div>
+
+      {Object.entries(userData).map(([key, value]) => {
+        return <SettingDataSection key={key} dataSection={key} />;
+      })}
     </div>
   );
 }

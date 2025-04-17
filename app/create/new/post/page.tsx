@@ -30,7 +30,7 @@ const formSchema = z.object({
   type: z.enum(["post", "video", "audio", "image", "document"]),
 });
 
-export default function New() {
+export default function NewPost() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

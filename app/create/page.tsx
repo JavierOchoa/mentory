@@ -78,16 +78,26 @@ export default function Create() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-8rem)] flex flex-col items-center justify-center gap-4 text-center">
-      <p className="text-muted-foreground">
-        You currently don't have any content
-      </p>
-      <Link
-        href="/create/new"
-        className={buttonVariants({ variant: "default" })}
-      >
-        Create new content
-      </Link>
+    <div className="min-h-[calc(100vh-8rem)] flex flex-col items-center text-center">
+      <div className="flex-grow flex items-center justify-center">
+        <p className="text-muted-foreground">
+          You currently don't have any content
+        </p>
+      </div>
+      <div className="flex flex-col justify-center w-full gap-y-2 -mb-4">
+        <Link
+          href="/create/new/course"
+          className={buttonVariants({ variant: "default" })}
+        >
+          Create new course
+        </Link>
+        <Link
+          href="/create/new/post"
+          className={buttonVariants({ variant: "default" })}
+        >
+          Create new post
+        </Link>
+      </div>
     </div>
   );
 }

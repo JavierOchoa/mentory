@@ -6,38 +6,24 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import SettingDataSection from "@/components/settings-data-section";
-
-type UserData = {
-  name: string;
-  avatar: string;
-  role: string;
-  email: string;
-};
+import { UserData } from "@/types";
+import { handleBecomeInstructor } from "@/components/handle-become-instructor";
 
 export default function UserSettings() {
   const [userData, setUserData] = useState<UserData | null>(null);
   const supabase = createClient();
-  const handleBecomeInstructor = async () => {
+  const changeRole = async () => {
     if (!userData) return;
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) return;
+    handleBecomeInstructor(userData);
 
-    const { error } = await supabase
-      .from("profiles")
-      .update({
-        role: userData.role === "instructor" ? "student" : "instructor",
-      })
-      .eq("id", user.id);
-
-    if (error) {
-      console.error("Error updating role:", error.message);
-      return;
-    }
-
-    setUserData((prev) => prev && { ...prev, role: "instructor" });
+    setUserData(
+      (prev) =>
+        prev && {
+          ...prev,
+          role: userData.role === "instructor" ? "student" : "instructor",
+        },
+    );
   };
 
   useEffect(() => {
@@ -68,7 +54,11 @@ export default function UserSettings() {
   }, [supabase]);
 
   if (!userData) {
-    return <div className="p-6 text-center">Loading...</div>;
+    return (
+      <div className="min-h-[calc(100vh-8rem)] flex flex-col items-center justify-center gap-4 text-center text-muted-foreground">
+        Loading...
+      </div>
+    );
   }
 
   return (
@@ -95,7 +85,7 @@ export default function UserSettings() {
       </div>
 
       <div className="flex flex-wrap gap-4">
-        <Button variant="outline" onClick={handleBecomeInstructor}>
+        <Button variant="outline" onClick={changeRole}>
           {userData.role === "instructor"
             ? "Become Student"
             : "Become Instructor"}

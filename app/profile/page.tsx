@@ -63,10 +63,8 @@ export default function UserSettings() {
 
   return (
     <div className="flex flex-col align-center gap-y-6 md:w-full">
-      <div className="flex flex-row justify-between">
-        <h1 className="block sm:hidden text-4xl lg:text-3xl font-bold">
-          Profile
-        </h1>
+      <div className="sm:hidden flex flex-row justify-between">
+        <h1 className="text-4xl lg:text-3xl font-bold">Profile</h1>
         <ThemeSwitcher />
       </div>
       <div className="flex flex-row justify-between">

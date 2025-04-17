@@ -22,8 +22,8 @@ const ThemeSwitcher = () => {
   const ICON_SIZE = 16;
 
   return (
-    <Button 
-      variant="ghost" 
+    <Button
+      variant="ghost"
       size="icon"
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
     >

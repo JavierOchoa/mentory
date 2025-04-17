@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { createClient } from '@/utils/supabase/client';
-import { Button } from '@/components/ui/button';
-import Image from 'next/image';
-import { ThemeSwitcher } from '@/components/theme-switcher';
+import { useEffect, useState } from "react";
+import { createClient } from "@/utils/supabase/client";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 
 type UserData = {
   name: string;
@@ -19,20 +19,24 @@ export default function UserSettings() {
   const handleBecomeInstructor = async () => {
     if (!userData) return;
 
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     if (!user) return;
 
     const { error } = await supabase
-      .from('profiles')
-      .update({ role: userData.role === 'instructor' ? 'student' : 'instructor' })
-      .eq('id', user.id);
+      .from("profiles")
+      .update({
+        role: userData.role === "instructor" ? "student" : "instructor",
+      })
+      .eq("id", user.id);
 
     if (error) {
-      console.error('Error updating role:', error.message);
+      console.error("Error updating role:", error.message);
       return;
     }
 
-    setUserData((prev) => prev && { ...prev, role: 'instructor' });
+    setUserData((prev) => prev && { ...prev, role: "instructor" });
   };
 
   useEffect(() => {
@@ -44,9 +48,9 @@ export default function UserSettings() {
       if (!user) return;
 
       const { data: profile } = await supabase
-        .from('profiles')
-        .select('name, avatar, role')
-        .eq('id', user.id)
+        .from("profiles")
+        .select("name, avatar, role")
+        .eq("id", user.id)
         .single();
 
       if (profile) {
@@ -54,7 +58,7 @@ export default function UserSettings() {
           name: profile.name,
           avatar: profile.avatar,
           role: profile.role,
-          email: user.email ?? '',
+          email: user.email ?? "",
         });
       }
     };
@@ -69,7 +73,9 @@ export default function UserSettings() {
   return (
     <div className="flex flex-col align-center gap-y-6 md:w-full">
       <div className="flex flex-row justify-between">
-        <h1 className="block sm:hidden text-4xl lg:text-3xl font-bold">Profile</h1>
+        <h1 className="block sm:hidden text-4xl lg:text-3xl font-bold">
+          Profile
+        </h1>
         <ThemeSwitcher />
       </div>
       <div className="flex flex-row justify-between">
@@ -86,20 +92,22 @@ export default function UserSettings() {
           />
         </div>
       </div>
-  
+
       <div className="w-full flex items-center gap-4">
         <p className="text-base font-medium">Email:</p>
         <div className="border rounded-xl py-2 px-4 bg-muted w-full md:w-1/3">
           <p className="text-base">{userData.email}</p>
         </div>
       </div>
-      
 
       <div className="flex flex-wrap gap-4 justify-center">
         <Button>Update Profile</Button>
-        <Button variant="outline" onClick={handleBecomeInstructor}>{userData.role === 'instructor' ? 'Become Student' : 'Become Instructor'}</Button>
+        <Button variant="outline" onClick={handleBecomeInstructor}>
+          {userData.role === "instructor"
+            ? "Become Student"
+            : "Become Instructor"}
+        </Button>
       </div>
     </div>
-  );  
-
+  );
 }

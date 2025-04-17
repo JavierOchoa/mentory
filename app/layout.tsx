@@ -44,9 +44,13 @@ export default function RootLayout({
               <nav className="hidden sm:flex w-full justify-center border-b border-b-foreground/10 h-16">
                 <div className="w-full flex justify-between items-center p-3 px-5 text-sm">
                   <div className="flex gap-5 items-center font-semibold">
-                    <Link href={"/"} className="text-xl font-bold tracking-wide">MENTORY</Link>
-                    <div className="flex items-center gap-2">
-                    </div>
+                    <Link
+                      href={"/"}
+                      className="text-xl font-bold tracking-wide"
+                    >
+                      MENTORY
+                    </Link>
+                    <div className="flex items-center gap-2"></div>
                   </div>
                   {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
                 </div>

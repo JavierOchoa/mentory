@@ -8,8 +8,7 @@ type PageProps = {
 };
 
 export default async function CoursePage({ params }: PageProps) {
-  const supabase = await createClient();
-  console.log("ssss");
+  const supabase = createClient();
 
   const { data: course, error } = await supabase
     .from("courses")

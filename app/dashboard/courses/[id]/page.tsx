@@ -1,23 +1,24 @@
-import { createClient } from "@/utils/supabase/server"; // Adjust path as needed
+import { createClient } from "@/utils/supabase/server";
 import { notFound } from "next/navigation";
 
 type PageProps = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export default async function CoursePage({ params }: PageProps) {
-  const supabase = createClient();
+  const { id } = await params;
+  const supabase = await createClient();
 
   const { data: course, error } = await supabase
     .from("courses")
     .select("*")
-    .eq("id", params.id)
+    .eq("id", id)
     .single();
 
   if (!course || error) {
-    return notFound(); // Renders the 404 page if course isn't found
+    return notFound();
   }
 
   return (
